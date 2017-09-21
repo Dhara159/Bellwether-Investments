@@ -3,6 +3,9 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.sql.PreparedStatement;
@@ -59,6 +62,9 @@ public final class past_005fData_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -72,8 +78,16 @@ public final class past_005fData_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n");
       out.write("        <link href=\"css/datepicker3.css\" rel=\"stylesheet\">\n");
       out.write("        <link href=\"css/styles.css\" rel=\"stylesheet\">\n");
+      out.write("        <link href=\"css/style_live.css\" rel=\"stylesheet\">\n");
       out.write("\n");
       out.write("        <script src=\"js/lumino.glyphs.js\"></script>\n");
+      out.write("        <script type=\"text/javascript\" src=\"js/jquery-1.4.2.min.js\"></script>\n");
+      out.write("        <script src=\"js/jquery.autocomplete.js\"></script>\n");
+      out.write("        <script>\n");
+      out.write("            jQuery(function(){\n");
+      out.write("                $(\"#trade\").autocomplete(\"live.jsp\");\n");
+      out.write("            });\n");
+      out.write("        </script>\n");
       out.write("        <title>Past Data</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
@@ -90,7 +104,7 @@ public final class past_005fData_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    <div class=\"col-md-4\">\n");
       out.write("                        <div class=\"form-group\">\n");
       out.write("                            <label for=\"usr\">Name:</label>\n");
-      out.write("                            <input type=\"text\" class=\"form-control\" name=\"trade\" id=\"trade\">\n");
+      out.write("                            <input type=\"text\" class=\"form-control input_text\" name=\"trade\" id=\"trade\" autocomplete=\"on\">\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"col-md-4\">\n");
@@ -109,7 +123,7 @@ public final class past_005fData_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    \n");
       out.write("                    <button type=\"submit\" class=\"btn btn-lg btn-primary\" name=\"click\" id=\"button_setting\">Search</button>\n");
       out.write("                  </form>\n");
-      out.write("                  \n");
+      out.write("    \n");
       out.write("            \n");
       out.write("              \n");
       out.write("                <table class=\"table table-bordered\" data-toggle=\"table\" data-show-refresh=\"true\" data-show-toggle=\"true\" data-show-columns=\"true\" data-search=\"true\" data-select-item-name=\"toolbar1\" data-pagination=\"true\" data-sort-name=\"name\" data-sort-order=\"desc\">\n");
@@ -128,18 +142,19 @@ public final class past_005fData_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("         \n");
       out.write("        ");
 
+                   
                    if(request.getParameter("click") != null)
                     {
                     String trade = request.getParameter("trade");
                     Object f_date = request.getParameter("f_date");
                     Object t_date = request.getParameter("t_date");
-                    SimpleDateFormat formatter=new SimpleDateFormat("DD-MM-YYYY");
+                    SimpleDateFormat formatter=new SimpleDateFormat("dd-MM-YYYY");
 //                    String dates=formatter.format(date);
              try 
             {
             Class.forName("com.mysql.jdbc.Driver"); 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/bellwether1","root","");
-//            String sql= ;
+    
             Statement stmt = con.createStatement();  
 //            ps.setString(1,trade);
 //            ps.setObject(2,f_date);
